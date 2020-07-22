@@ -130,13 +130,13 @@ public enum HeroClass {
 		// 财富之戒
 		RingOfWealth wealth = new RingOfWealth();
 		wealth.identify().upgrade(10).collect();
-		if (!Challenges.isItemBlocked(wealth)) hero.belongings.misc1 = wealth;
+		//if (!Challenges.isItemBlocked(wealth)) hero.belongings.misc1 = wealth;
 
 		//丰饶之角
 		HornOfPlenty horn =	new HornOfPlenty();
 		horn.identify().upgrade(10).collect();
 		Dungeon.quickslot.setSlot(3, horn);
-		if (!Challenges.isItemBlocked(horn)) hero.belongings.misc2 = horn;
+		//if (!Challenges.isItemBlocked(horn)) hero.belongings.misc2 = horn;
 
 		//药剂挎带
 		new PotionBandolier().collect();
