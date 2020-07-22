@@ -118,12 +118,19 @@ public enum HeroClass {
     //i = new MeatPie();
     //if (!Challenges.isItemBlocked(i)) i.collect();
 
-		//丰饶之角
-		new HornOfPlenty().identify().upgrade(10).collect();
+
 		//// 根骨之戒
 		//new RingOfMight().identify().upgrade(10).collect();
+
 		// 财富之戒
-		new RingOfWealth().identify().upgrade(10).collect();
+		RingOfWealth wealth = new RingOfWealth();
+		(hero.belongings.misc1 = wealth).identify().upgrade(10).collect();
+		Dungeon.quickslot.setSlot(2, wealth);
+
+		//丰饶之角
+		HornOfPlenty horn =	new HornOfPlenty();
+		(hero.belongings.misc2 = horn).identify().upgrade(10).collect();
+		Dungeon.quickslot.setSlot(3, horn);
 
 		//药剂挎带
 		new PotionBandolier().collect();
@@ -139,12 +146,12 @@ public enum HeroClass {
 		Dungeon.LimitedDrops.VELVET_POUCH.drop();
 
 		//缩餐节食 挑战
-		if (Dungeon.isChallenged(Challenges.NO_FOOD)){
+		if (Dungeon.isChallenged(Challenges.NO_FOOD))
+		{
 			new SmallRation().collect();
 		}
 
 		//TODO 设置默认识别
-
 		//升级卷轴
 		new ScrollOfUpgrade().identify();
 		//鉴定卷轴
@@ -178,8 +185,8 @@ public enum HeroClass {
 			hero.belongings.armor.affixSeal(new BrokenSeal());
 		}
 
-		new PotionBandolier().collect();
-		Dungeon.LimitedDrops.POTION_BANDOLIER.drop();
+		//new PotionBandolier().collect();
+		//Dungeon.LimitedDrops.POTION_BANDOLIER.drop();
 
 		new PotionOfHealing().identify();
 		new ScrollOfRage().identify();
@@ -195,8 +202,8 @@ public enum HeroClass {
 
 		Dungeon.quickslot.setSlot(0, staff);
 
-		new ScrollHolder().collect();
-		Dungeon.LimitedDrops.SCROLL_HOLDER.drop();
+		//new ScrollHolder().collect();
+		//Dungeon.LimitedDrops.SCROLL_HOLDER.drop();
 
 		new ScrollOfUpgrade().identify();
 		new PotionOfLiquidFlame().identify();
@@ -215,8 +222,8 @@ public enum HeroClass {
 		Dungeon.quickslot.setSlot(0, cloak);
 		Dungeon.quickslot.setSlot(1, knives);
 
-		new VelvetPouch().collect();
-		Dungeon.LimitedDrops.VELVET_POUCH.drop();
+		//new VelvetPouch().collect();
+		//Dungeon.LimitedDrops.VELVET_POUCH.drop();
 
 		new ScrollOfMagicMapping().identify();
 		new PotionOfInvisibility().identify();
@@ -230,8 +237,8 @@ public enum HeroClass {
 
 		Dungeon.quickslot.setSlot(0, bow);
 
-		new VelvetPouch().collect();
-		Dungeon.LimitedDrops.VELVET_POUCH.drop();
+		//new VelvetPouch().collect();
+		//Dungeon.LimitedDrops.VELVET_POUCH.drop();
 
 		new PotionOfMindVision().identify();
 		new ScrollOfLullaby().identify();
