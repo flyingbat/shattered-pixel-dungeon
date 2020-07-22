@@ -26,6 +26,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Badges;
 import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.items.BrokenSeal;
+import com.shatteredpixel.shatteredpixeldungeon.items.DewVial;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.ClothArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CloakOfShadows;
@@ -118,14 +119,17 @@ public enum HeroClass {
     //i = new MeatPie();
     //if (!Challenges.isItemBlocked(i)) i.collect();
 
+		//露珠瓶
+		DewVial dewVial = new DewVial();
+		dewVial.identify().collect();
+		Dungeon.quickslot.setSlot(2, dewVial);
+		Dungeon.LimitedDrops.DEW_VIAL.drop();
 
 		//// 根骨之戒
 		//new RingOfMight().identify().upgrade(10).collect();
-
 		// 财富之戒
 		RingOfWealth wealth = new RingOfWealth();
 		(hero.belongings.misc1 = wealth).identify().upgrade(10).collect();
-		Dungeon.quickslot.setSlot(2, wealth);
 
 		//丰饶之角
 		HornOfPlenty horn =	new HornOfPlenty();
