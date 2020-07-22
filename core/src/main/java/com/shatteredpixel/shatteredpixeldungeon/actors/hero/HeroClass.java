@@ -39,6 +39,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfInvisibility;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfLiquidFlame;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfMindVision;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfStrength;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfWealth;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfIdentify;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfLullaby;
@@ -142,8 +143,14 @@ public enum HeroClass {
 			new SmallRation().collect();
 		}
 
-		//鉴定卷轴 默认识别
+		//TODO 设置默认识别
+
+		//升级卷轴
+		new ScrollOfUpgrade().identify();
+		//鉴定卷轴
 		new ScrollOfIdentify().identify();
+		//力量药剂
+		new PotionOfStrength().identify();
 
 	}
 
