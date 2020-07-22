@@ -29,15 +29,17 @@ import com.shatteredpixel.shatteredpixeldungeon.items.BrokenSeal;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.ClothArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CloakOfShadows;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.HornOfPlenty;
+import com.shatteredpixel.shatteredpixeldungeon.items.bags.MagicalHolster;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.PotionBandolier;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.ScrollHolder;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.VelvetPouch;
-import com.shatteredpixel.shatteredpixeldungeon.items.food.Food;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.SmallRation;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfInvisibility;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfLiquidFlame;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfMindVision;
+import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfWealth;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfIdentify;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfLullaby;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfMagicMapping;
@@ -96,17 +98,51 @@ public enum HeroClass {
 
 	}
 
+	/**
+	 * 初始化共同拥有
+	 * @param hero 英雄对象
+	 */
 	private static void initCommon( Hero hero ) {
+		//布甲
 		Item i = new ClothArmor().identify();
 		if (!Challenges.isItemBlocked(i)) hero.belongings.armor = (ClothArmor)i;
 
-		i = new Food();
-		if (!Challenges.isItemBlocked(i)) i.collect();
+		////口粮
+		//i = new Food();
+		//if (!Challenges.isItemBlocked(i)) i.collect();
+		////肉馅饼
+    //i = new Pasty();
+    //if (!Challenges.isItemBlocked(i)) i.collect();
+    ////全肉大饼
+    //i = new MeatPie();
+    //if (!Challenges.isItemBlocked(i)) i.collect();
 
+		//丰饶之角
+		new HornOfPlenty().identify().upgrade(10).collect();
+		//// 根骨之戒
+		//new RingOfMight().identify().upgrade(10).collect();
+		// 财富之戒
+		new RingOfWealth().identify().upgrade(10).collect();
+
+		//药剂挎带
+		new PotionBandolier().collect();
+		Dungeon.LimitedDrops.POTION_BANDOLIER.drop();
+		//卷轴筒
+		new ScrollHolder().collect();
+		Dungeon.LimitedDrops.SCROLL_HOLDER.drop();
+		//魔法筒袋
+		new MagicalHolster().collect();
+		Dungeon.LimitedDrops.MAGICAL_HOLSTER.drop();
+		//绒布袋
+		new VelvetPouch().collect();
+		Dungeon.LimitedDrops.VELVET_POUCH.drop();
+
+		//缩餐节食 挑战
 		if (Dungeon.isChallenged(Challenges.NO_FOOD)){
 			new SmallRation().collect();
 		}
 
+		//鉴定卷轴 默认识别
 		new ScrollOfIdentify().identify();
 
 	}
