@@ -57,31 +57,28 @@ public class DesktopLauncher {
 			title = DesktopLauncher.class.getPackage().getSpecificationTitle();
 		}
 		
-		Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-			@Override
-			public void uncaughtException(Thread thread, Throwable throwable) {
-				Game.reportException(throwable);
-				StringWriter sw = new StringWriter();
-				PrintWriter pw = new PrintWriter(sw);
-				throwable.printStackTrace(pw);
-				pw.flush();
-				String exceptionMsg = sw.toString();
+		Thread.setDefaultUncaughtExceptionHandler((thread, throwable) -> {
+			Game.reportException(throwable);
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			throwable.printStackTrace(pw);
+			pw.flush();
+			String exceptionMsg = sw.toString();
 
-				//shorten/simplify exception message to make it easier to fit into a message box
-				exceptionMsg = exceptionMsg.replaceAll("\\(.*:([0-9]*)\\)", "($1)");
-				exceptionMsg = exceptionMsg.replace("com.shatteredpixel.shatteredpixeldungeon.", "");
-				exceptionMsg = exceptionMsg.replace("com.watabou.", "");
-				exceptionMsg = exceptionMsg.replace("com.badlogic.gdx.", "");
-				exceptionMsg = exceptionMsg.replace("\t", "    ");
+			//shorten/simplify exception message to make it easier to fit into a message box
+			exceptionMsg = exceptionMsg.replaceAll("\\(.*:([0-9]*)\\)", "($1)");
+			exceptionMsg = exceptionMsg.replace("com.shatteredpixel.shatteredpixeldungeon.", "");
+			exceptionMsg = exceptionMsg.replace("com.watabou.", "");
+			exceptionMsg = exceptionMsg.replace("com.badlogic.gdx.", "");
+			exceptionMsg = exceptionMsg.replace("\t", "    ");
 
-				TinyFileDialogs.tinyfd_messageBox(title + " Has Crashed!",
-						title + " has run into an error it can't recover from and has crashed, sorry about that!\n\n" +
-						"If you could, please email this error message to the developer (Evan@ShatteredPixel.com):\n\n" +
-						"version: " + Game.version + "\n" +
-						exceptionMsg,
-						"ok", "error", false );
-				if (Gdx.app != null) Gdx.app.exit();
-			}
+			TinyFileDialogs.tinyfd_messageBox(title + " Has Crashed!",
+					title + " has run into an error it can't recover from and has crashed, sorry about that!\n\n" +
+					"If you could, please email this error message to the developer (Evan@ShatteredPixel.com):\n\n" +
+					"version: " + Game.version + "\n" +
+					exceptionMsg,
+					"ok", "error", false );
+			if (Gdx.app != null) Gdx.app.exit();
 		});
 		
 		Game.version = DesktopLauncher.class.getPackage().getSpecificationVersion();
